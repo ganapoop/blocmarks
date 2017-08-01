@@ -22,6 +22,8 @@ gem 'turbolinks'
 gem 'bootstrap-sass', '3.2.0.2'
 gem 'figaro'
 gem 'devise'
+gem 'frontend-generators'
+gem 'pundit'
 
 group :development, :test do
   gem 'byebug'

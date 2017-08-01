@@ -1,5 +1,5 @@
 <h1>Topics</h1>
-<%= link_to "New Topic", new_topic_path, class: 'btn btn-success' %>
+<%= link_to "New Topic", new_topic_path, class: 'btn btn-social' %>
 <div class="row">
   <div class="col-md-8">
     <% @topics.each do |topic| %>
@@ -15,7 +15,6 @@
         </div>
       </h4>
     </div>
+    <% end %>
   </div>
-  <% end %>
-</div>
 </div>
