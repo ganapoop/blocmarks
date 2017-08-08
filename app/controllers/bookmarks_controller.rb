@@ -5,11 +5,10 @@ class BookmarksController < ApplicationController
   end
 
   def create
-    authorize @bookmark
     @topic = Topic.find(params[:topic_id])
-    @bookmark = @topic.bookmarks.create(bookmark_params)
+    @bookmark = @topic.bookmarks.new(bookmark_params)
 
-
+    # authorize @bookmark
 
     if @bookmark.save
       flash[:notice] = "Bookmark saved!"
@@ -23,12 +22,10 @@ class BookmarksController < ApplicationController
   def show
     authorize @bookmark
     @bookmark = Bookmark.find(params[:id])
-
   end
 
   def edit
     @bookmark = Bookmark.find(params[:id])
-
   end
 
   def update

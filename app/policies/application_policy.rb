@@ -23,31 +23,31 @@ class ApplicationPolicy
   end
 
   def update?
-    if user.present? && (record.user == user)
+    user.present? && (record.user == user)
+  end
+
+  def edit?
+    update?
+  end
+  
+  def destroy?
+    user.present? && (record.user == user)
+  end
+
+  def scope
+    Pundit.policy_scope!(user, record.class)
+  end
+
+  class Scope
+    attr_reader :user, :scope
+
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
     end
 
-    def edit?
-      update?
-    end
-
-    def destroy?
-      user.present? && (record.user == user)
-    end
-
-    def scope
-      Pundit.policy_scope!(user, record.class)
-    end
-
-    class Scope
-      attr_reader :user, :scope
-
-      def initialize(user, scope)
-        @user = user
-        @scope = scope
-      end
-
-      def resolve
-        scope
-      end
+    def resolve
+      scope
     end
   end
+end
