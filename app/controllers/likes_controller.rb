@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
   def index
+    @likes = Like.all
   end
 
   def create
@@ -7,24 +8,24 @@ class LikesController < ApplicationController
     like = current_user.likes.build(bookmark: @bookmark)
 
     if like.save
-      flash[:notice] = "Your like has been saved!"
-      redirect_to topic_path(bookmark.topic_id)
+      flash[:notice] = "You have liked this bookmark!"
+      redirect_to @bookmark.topic
     else
-      flash[:alert] = "There was an error saving your like. Please try again."
-      redirect_to topic_path(bookmark.topic_id)
+      flash[:notice] = "Unable to like bookmark, please try again."
+      redirect_to @bookmark.topic
     end
   end
 
   def destroy
-    bookmark = Bookmark.find(params[:bookmark_id])
-    like = Like.find(params[:id])
+    @bookmark = Bookmark.find(params[:bookmark_id])
+    like = current_user.likes.find(params[:id])
 
     if like.destroy
-      flash[:notice] = "Bookmark unliked."
-      redirect_to topic_path(bookmark.topic_id)
+      flash[:notice] = "You have unliked this bookmark!"
+      redirect_to @bookmark.topic
     else
-      flash[:alert] = "Unliking failed."
-      redirect_to topic_path(bookmark.topic_id)
+      flash[:notice] = "Unable to unlike bookmark, please try again."
+      redirect_to @bookmark.topic
     end
   end
 end

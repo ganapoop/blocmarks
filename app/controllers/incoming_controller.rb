@@ -9,6 +9,10 @@ class IncomingController < ApplicationController
 
     # You put the message-splitting and business
     # magic here.
+      user = User.find_by(email: params["sender"])
+      topic = Topic.find_by(id: params["subject"])
+
+      user.bookmarks.create(topic: topic, url: params["body-plain"])
      # Find the user by using params[:sender]
      # Find the topic by using params[:subject]
      # Assign the url to a variable after retreiving it from params["body-plain"]

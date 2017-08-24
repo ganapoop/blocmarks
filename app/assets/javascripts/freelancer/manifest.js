@@ -6,4 +6,3 @@
 //= require freelancer/contact_me
 //= require freelancer/freelancer
 //= require freelancer/jqBootstrapValidation
-

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :name
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
